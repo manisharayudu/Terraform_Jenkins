@@ -2,26 +2,25 @@ pipeline {
            agent any
            stages {
                 stage("Hello") {
+                    agent any
                      steps {
                           echo 'Hello World'
-                     }
-           } 
-                stage('Build Docker Image') {
-                    steps {
-                        script {
-                            sh 'sudo docker build -t manisharayudu/my-app-1.0 .'
+                    }
                 }
-            }
-        }
+                stage('Build Docker Image') {
+                    agent any
+                        steps {
+                            sh 'docker build -t manisharayudu/hello-world:1.0 .'
+                        }
+                }
                 stage('Deploy Docker Image') {
+                    agent any
                     steps {
-                        script {
                             withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
                                 sh 'docker login -u manisharayudu -p ${dockerhubpwd}'
-                 }  
-                            sh 'sudo docker push manisharayudu/my-app-1.0'
+                    }  
+                            sh 'docker push manisharayudu/hello-world:1.0'
                 }
             }
         }
     }
-}
