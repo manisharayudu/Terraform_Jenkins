@@ -1,6 +1,5 @@
 FROM ubuntu:latest
 
-LABEL version="0.0.1"
 LABEL maitainer="manisharayudu127@gmail.com"
 
 RUN  apt-get update && apt-get upgrade -y
