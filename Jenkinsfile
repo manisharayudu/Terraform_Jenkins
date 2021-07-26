@@ -15,7 +15,7 @@ pipeline {
                 stage('Run Docker Image') {
                     agent any
                         steps {
-                            sh 'docker run -p 80:80 -t manisharayudu12/mynginximage'
+                            sh 'docker run -p 90:90 -t manisharayudu12/mynginximage'
                         }
                 }
                 stage('Deploy Docker Image') {
