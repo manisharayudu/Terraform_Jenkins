@@ -9,13 +9,13 @@ pipeline {
                 stage('Build Docker Image') {
                     agent any
                         steps {
-                            sh 'docker build -t custom-nginx .'
+                            sh 'docker build -t some-content-nginx .'
                         }
                 }
                 stage('Run Docker Image') {
                     agent any
                         steps {
-                            sh 'docker run --name my-custom-nginx-container -d custom-nginx'
+                            sh ' docker run --name some-nginx -d some-content-nginx'
                         }
                 }
                 stage('Deploy Docker Image') {
@@ -24,7 +24,7 @@ pipeline {
                             withCredentials([string(credentialsId: 'manisharayudu12', variable: 'docker-hub')]) {
                                 sh 'docker login -u manisharayudu12 -p ${docker-hub}'
                             }  
-                            sh 'docker push manisharayudu12/custom-nginx'
+                            sh 'docker push manisharayudu12/some-content-nginx'
                     }
                 }
            }
