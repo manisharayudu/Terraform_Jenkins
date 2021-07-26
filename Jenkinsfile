@@ -1,6 +1,11 @@
 pipeline {
            agent any
            stages {
+                stage('Checkout Source') {
+                    steps {  
+                        git url:'https://github.com/manisharayudu/Terraform_Jenkins.git', branch:'main'
+                    }
+                }
                 stage("Hello") {
                     agent any
                      steps {
