@@ -9,7 +9,7 @@ pipeline {
                 stage('Build Docker Image') {
                     steps {
                         script {
-                            sh 'docker build -t manisharayudu/my-app-1.0 .'
+                            sh 'sudo docker build -t manisharayudu/my-app-1.0 .'
                 }
             }
         }
@@ -19,7 +19,7 @@ pipeline {
                             withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
                                 sh 'docker login -u manisharayudu -p ${dockerhubpwd}'
                  }  
-                            sh 'docker push manisharayudu/my-app-1.0'
+                            sh 'sudo docker push manisharayudu/my-app-1.0'
                 }
             }
         }
