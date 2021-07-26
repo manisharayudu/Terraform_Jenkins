@@ -1,9 +1,9 @@
 pipeline {
            agent any
            stages {
-                stage('Checkout Source') {
+                stage('Pull from GitHub') {
                     steps {  
-                        git url:'https://github.com/manisharayudu/Terraform_Jenkins.git', branch:'main'
+                        git 'https://github.com/manisharayudu/Terraform_Jenkins.git'
                     }
                 }
                 stage("Hello") {
@@ -15,7 +15,13 @@ pipeline {
                 stage('Build Docker Image') {
                     agent any
                         steps {
-                            sh 'docker build -t manisharayudu12/hello-world:1.0 .'
+                            sh 'docker build -t hello-world .'
+                        }
+                }
+                stage('Run Docker Image') {
+                    agent any
+                        steps {
+                            sh 'docker run -d -p 80:80 hello-world'
                         }
                 }
                 stage('Deploy Docker Image') {
@@ -24,7 +30,7 @@ pipeline {
                             withCredentials([string(credentialsId: 'manisharayudu12', variable: 'docker-hub')]) {
                                 sh 'docker login -u manisharayudu12 -p ${docker-hub}'
                             }  
-                            sh 'docker push manisharayudu12/hello-world:1.0'
+                            sh 'docker push manisharayudu12/learning:hello-world'
                     }
                 }
            }
