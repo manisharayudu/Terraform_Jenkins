@@ -17,10 +17,10 @@ pipeline {
                     agent any
                     steps {
                             withCredentials([string(credentialsId: 'manisharayudu12', variable: 'docker-hub')]) {
-}
                                 sh 'docker login -u manisharayudu12 -p ${docker-hub}'
-                    }  
+                            }  
                             sh 'docker push manisharayudu12/hello-world:1.0'
+                    }
                 }
-            }
-        }
+           }
+}
