@@ -1,4 +1,9 @@
 pipeline {
+environment {
+registry = "manisharayudu12/learning"
+registryCredential = 'docker-hub'
+dockerImage = ''
+}
 agent any
 stages {
 stage('Cloning our Git') {
