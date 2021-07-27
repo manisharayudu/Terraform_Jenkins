@@ -1,11 +1,7 @@
-FROM ubuntu:latest
- 
-LABEL maintainer="manisharayudu127@gmail.com"
+FROM python:latest
 
-RUN apt-get update && apt-get upgrade -y
- 
-RUN apt-get install nginx -y
- 
-EXPOSE 80
+LABEL maitainer="manisharayudu127@gmail.com"
 
-CMD ["nginx", "-g", "daemon off;"]
+ADD my_script.py /
+
+CMD [ "python", "./my_script.py" ]
